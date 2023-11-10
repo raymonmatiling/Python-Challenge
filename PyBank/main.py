@@ -33,14 +33,17 @@ with open(PyBankcsv, newline="") as csvfile:
     prev_net = int(first_row[1])
             
     for row in csvreader:    
-      
+      # Use count to count the number months in this dataset
       count += 1 
-      total_profit += int(row[1])
-           
+      
+      # Calculate the total and change profits
+      total_profit += int(row[1])        
       monthly_changes = int(row[1]) - prev_net
       prev_net = int(row[1])
       monthly_changes_profits += [monthly_changes]
       date += [row[0]]
+      
+      # Calculate the average change in profits
       total_change_profits = sum(monthly_changes_profits) / len(monthly_changes_profits)
       
     # Find the greatest increase and decrease in profits
@@ -60,8 +63,7 @@ with open(PyBankcsv, newline="") as csvfile:
     print("Greatest Decrease in Profits: " + str(decrease_date) + " ($" + str(greatest_decrease_profits)+ ")")
     print("----------------------------------------------------------")
 
-# Print to a text file: election_results.txt
-
+# Print to a text file: financial_analysis.txt
 with open('financial_analysis.txt', 'w') as text:
     text.write("----------------------------------------------------------\n")
     text.write("  Financial Analysis"+ "\n")
